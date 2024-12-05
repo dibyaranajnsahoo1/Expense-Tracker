@@ -1,0 +1,11 @@
+.PieChart {
+  width: 240px;
+  height: 240px;
+  border-radius: 15px;
+  padding: 10px;
+  color: white;
+}
+.chart{
+  width: 199px;
+  height: 199px;
+}

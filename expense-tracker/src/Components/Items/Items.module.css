@@ -1,0 +1,64 @@
+.Item {
+  border-radius: 10px;
+  width: 705px;
+  display: flex;
+  flex-direction: column;
+
+}
+.line {
+  height: 20px;
+  color: red;
+  border-top: 1px solid rgba(155, 155, 155, 1);
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  color: black;
+  /* width: 600px; */
+}
+
+.nameDate {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.79px;
+  text-align: left;
+  .date {
+    color: rgba(155, 155, 155, 1);
+  }
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.cost {
+  color: rgba(244, 187, 74, 1);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 21.79px;
+  text-align: left;
+}
+.pencil {
+  width: 20px;
+}
+.pencilBtn {
+  padding: 0;
+  background: rgba(244, 187, 74, 1);
+  border: none;
+  width: 37px;
+  height: 37px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.cancelBtn {
+  padding: 0;
+  background: rgba(255, 62, 62, 1);
+  border: none;
+  width: 37px;
+  height: 37px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}

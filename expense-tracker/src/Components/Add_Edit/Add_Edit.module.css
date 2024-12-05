@@ -1,0 +1,110 @@
+.expenses_Section {
+  width: 538px;
+  height: 335px;
+  padding: 34px 20px 40px 30px;
+  background: #EFEFEFD9;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  opacity: 1;
+}
+
+.heading {
+  font-family: Ubuntu;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 34.47px;
+  color: #000000;
+  text-align: left;
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  width: 100%;
+}
+
+.child {
+  width: 223px;
+  height: 51px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  padding: 16px 14px;
+  background-color: #fefdfd;
+}
+
+.balanceFields {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  width: 100%;
+  height: 53px;
+  border-radius: 15px 0px 0px 0px;
+}
+
+.priceInput {
+  width: 217px;
+  height: 51px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  padding: 16px 14px;
+  background-color: #FBFBFB;
+}
+
+.actionBtns button,
+.balanceFields button {
+  width: 112px;
+  height: 51px;
+  border-radius: 15px;
+  font-weight: 400;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  padding: 0 20px;
+}
+.actionBtns{
+  align-items: center;
+}
+
+.actionBtns button {
+  background-color: #F4BB4A; 
+}
+.actionBtns button:nth-child(2) {
+  background-color: #f6f6f6; 
+  color: black;
+}
+
+
+.addBalanceBtn {
+  background-color: #F4BB4A; 
+  
+}
+
+.cancelBtn {
+  background-color: #faf7f7; 
+  color: black;
+}
+
+.cancelBtn:hover {
+  background-color: #d5d2d2; 
+}
+
+button:focus {
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #4A90E2; 
+}
+
+input.child:focus,
+.actionBtns button:focus {
+  outline: none;
+}
