@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styles from "./AddEdit.module.css";
 
-const Add_Edit = ({
+const AddEdit = ({
   
   attr = "expense",
   editOrAdd = "Add",
@@ -138,4 +138,4 @@ const Add_Edit = ({
   );
 };
 
-export default Add_Edit;
+export default AddEdit;

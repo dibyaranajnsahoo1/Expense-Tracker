@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import PieChart from "../PieChart/PieChart";
-import AddEdit from "../Add_Edit/Add_Edit";
+import AddEdit from "../AddEdit/AddEdit";
 import Items from "../Items/Items";
 import Pagination from "./Pagination";
 
