@@ -3,7 +3,7 @@ import styles from "./Home.module.css";
 import PieChart from "../PieChart/PieChart";
 import AddEdit from "../Add_Edit/Add_Edit";
 import Items from "../Items/Items";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "./Pagination";
 
 const Home = () => {
   const [edit, setEdit] = useState(false);
