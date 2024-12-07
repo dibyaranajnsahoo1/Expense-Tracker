@@ -1,56 +1,30 @@
 .home {
   width: 1256px;
   height: 781px;
-  background: #3B3B3B;
+  background: rgba(59, 59, 59, 1);
   padding: 20px;
   align-items: center;
-  top: 36px;
-  left: 50px;
-  border-radius: 3px;
-  justify-content: center;
   margin: auto;
- 
 }
 .heading {
-  width: 251px;
-height: 37px;
-top: 48px;
-left: 32px;
-gap: 0px;
-opacity: 0px;
-font-family: Ubuntu;
-font-size: 32px;
-font-weight: 700;
-line-height: 36.77px;
-text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
-color: #FFFFFF;
-
-
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36.77px;
+  text-align: left;
+  margin-bottom: 9px;
+  color: white;
 }
 .top {
-  width: 98%;
-  height: 320px;
-   border-radius: 10px;
+  width: 1211px;
+  height: 269px;
+  border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   background: rgba(98, 98, 98, 1);
 
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   gap: 80px;
-}
-.top1{
-  width: 760px;
-  height: 181px;
-  top: 140px;
-  left: 90px;
-  border-radius: 15px;
-  display: flex;
-  gap: 80px;
-  justify-content:space-evenly
-
 }
 
 .box {
@@ -73,7 +47,7 @@ color: #FFFFFF;
 }
 
 .box > button {
-  margin-top: 10px; /* Adjust as needed */
+  margin-top: 10px; 
 
   font-size: 16px;
   font-weight: 700;
@@ -81,7 +55,6 @@ color: #FFFFFF;
   text-align: center;
   color: rgba(255, 255, 255, 1);
   border-radius: 15px;
-  border: none;
 
   width: 167.65px;
   height: 38px;
@@ -94,7 +67,6 @@ color: #FFFFFF;
     #ff4747 80%,
     #ff3838 100%
   ) !important;
-  border: none;
 }
 
 .addMoney {
@@ -109,30 +81,20 @@ color: #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
 }
 .bottom {
-  width: 1185px;
-  height: 345.03px;
-  top: 440.97px;
-  left: 32px;
-  gap: 0px;
-  border: 1px 0px 0px 0px;
-  opacity: 0px;
   display: flex;
-  margin-top: 30px;
-  justify-content: space-between;
+  margin-top: 36px;
+  justify-content: space-around;
 }
 .transactions {
   border-radius: 15px;
-  width: 738.33px;
-  height: 387px;
- 
+  width: 740px;
+  height: 350px;
 }
 .top_expenses {
   width: 417px;
   height: 387px;
- 
   border-radius: 15px;
 }
 .headings_1 {
@@ -145,23 +107,16 @@ color: #FFFFFF;
   margin-bottom: 10px;
 }
 .horizontalGraph {
+  width: 417px;
+  height: 345px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-width: 417px;
-height: 345px;
-top: 441px;
-left: 800px;
-gap: 0px;
-border-radius: 15px 0px 0px 0px;
-opacity: 0px;
-background: #FFFFFF;
-box-shadow: 0px 4px 4px 0px #00000040;
-display: flex;
-border-radius: 15px;
-padding: 7px 7px;
-gap: 10px;
-justify-content: space-evenly;
-
-
+  display: flex;
+  gap: 10px;
+  color: black;
+  padding: 30px 10px;
 }
 .YaxisNames {
   display: flex;
@@ -180,78 +135,33 @@ justify-content: space-evenly;
   border-radius: 0 20px 20px 0;
 }
 .entertaiment {
-  /* background-color: rgba(160, 0, 255, 0.8); */
-  width: 304px;
-height: 21.73px;
-top: 486.19px;
-left: 898px;
-gap: 0px;
-border-radius: 0px 20px 20px 0px;
-opacity: 0px;
-background: #8784D2;
-
-
+  background-color: #8784D2;
 }
 .travel {
-  width: 113px;
-height: 21.73px;
-top: 726.04px;
-left: 898px;
-gap: 0px;
-border-radius: 0px 20px 20px 0px;
-opacity: 0px;
-background: #8784D2;
-
+  background-color: #8784D2;
 }
 .food {
-  width: 184px;
-height: 21.73px;
-top: 606.98px;
-left: 898px;
-gap: 0px;
-border-radius: 0px 20px 20px 0px;
-opacity: 0px;
-background: #8784D2;
-
-}
-.pagination {
-  /* justify-self: right; */
-  display: flex;
-  margin-top: auto;
-  justify-content: center;
-  align-items: center;
+  background-color: #8784D2;
 }
 
 .transactionsDetails {
-
-  width: 738.33px;
-  height: 345.03px;
-  top: 440.97px;
-  left: 32px;
-  gap: 0px;
-  border-radius: 15px 0px 0px 0px;
-  opacity: 0px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 4px 0px #00000040;
-  padding: 5px 5px;
+  width: 740px;
+  height: 330px;
   border-radius: 15px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-
-  
-}
-/* Add missing style for fallback message */
-.fallback_message {
-  font-size: 1rem;
-  text-align: center;
-  color: gray;
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 10px;
 }
 
-/* Add missing style for transactionsDetails */
-.transactionsDetails p {
-  margin: 0;
-  font-size: 1rem;
-  text-align: center;
-  color: gray;
+.pagination {
+  /* justify-self: right; */
+  margin-top: auto;
 }
-
+.top1{
+  display: flex;
+  gap:20px;
+}

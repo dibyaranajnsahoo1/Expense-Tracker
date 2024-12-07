@@ -1,24 +1,8 @@
 .pagination {
-  /* display: flex;
+  display: flex;
   align-items: center;
   gap: 14px;
-  width: 137px;
-height: 37px;
-top: 739px;
-left: 319px;
-gap: 0px;
-opacity: 0px; */
-width: 137px;
-height: 37px;
-top: 739px;
-left: 319px;
-gap: 0px;
-opacity: 0px;
-display: flex;
-align-items: center;
-justify-content: center;
-
-
+  /* border: 1px solid yellow; */
 }
 
 .backBtn,
@@ -32,7 +16,6 @@ justify-content: center;
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease;
-  border: none;
 }
 
 .backBtn:hover,
@@ -46,22 +29,12 @@ justify-content: center;
 }
 
 .CurrentPage {
-  display: flex;
   width: 37px;
   height: 37px;
   border-radius: 5px;
   background: rgba(67, 150, 123, 1);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 5.5px 11.5px;
+  color: white;
+  padding: 5px 11px;
   text-align: center;
-  justify-content: center;
-  margin: auto;
-  width: 14px;
-height: 28px;
-top: 744px;
-left: 382px;
-gap: 0px;
-opacity: 0px;
-color: white;
-
 }

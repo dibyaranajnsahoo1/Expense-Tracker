@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styles from "./Home.module.css";
 import PieChart from "../PieChart/PieChart";
 import AddEdit from "../AddEdit/AddEdit";
@@ -20,18 +20,31 @@ const Home = () => {
     expense: 0,
     orgBalance: 5000,
   });
+  const [isLoading, setIsLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const storedTransactions = localStorage.getItem("transaction");
     setTransactions(storedTransactions ? JSON.parse(storedTransactions) : []);
+    setIsLoading(false); // Set loading to false after fetching data
   }, []);
+
+  const handleBalance_expenses = useCallback(() => {
+    let total_expense = transactions.reduce((total, e) => total + parseInt(e.price || 0), 0);
+    const balance = balance_expenses.orgBalance - total_expense;
+
+    setBalanceExpense((prev) => ({
+      ...prev,
+      balance,
+      expense: total_expense,
+    }));
+  }, [transactions, balance_expenses.orgBalance]);
 
   useEffect(() => {
     handleBalance_expenses();
     if (transactions.length) {
       localStorage.setItem("transaction", JSON.stringify(transactions));
     }
-  }, [transactions]);
+  }, [transactions, handleBalance_expenses]);
 
   const handleAddBalance = (addBalance) => {
     if (addBalance) {
@@ -41,17 +54,6 @@ const Home = () => {
         balance: prev.balance + parseInt(addBalance),
       }));
     }
-  };
-
-  const handleBalance_expenses = () => {
-    let total_expense = transactions.reduce((total, e) => total + parseInt(e.price || 0), 0);
-    const balance = balance_expenses.orgBalance - total_expense;
-
-    setBalanceExpense((prev) => ({
-      ...prev,
-      balance,
-      expense: total_expense,
-    }));
   };
 
   const handleNewTransactions = (newTransactionObj, oldtitle) => {
@@ -122,6 +124,10 @@ const Home = () => {
     setBars(barLengths);
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>; // Show loading state while data is being fetched
+  }
+
   return (
     <div>
       <div className={styles.home}>
@@ -135,7 +141,7 @@ const Home = () => {
                   ₹{balance_expenses.balance}
                 </span>
               </div>
-              <button onClick={() => handleEdit("income")}>+Add Income</button>
+              <button style={{border:"none"}} onClick={() => handleEdit("income")}>+Add Income</button>
             </div>
             <div className={styles.box}>
               <div>
@@ -146,7 +152,7 @@ const Home = () => {
               </div>
               <button
                 onClick={() => handleEdit("expense")}
-                className={styles.expenseBtn}
+                className={styles.expenseBtn} style={{border:"none"}}
               >
                 +Add Expense
               </button>
