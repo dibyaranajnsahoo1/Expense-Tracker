@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Home.module.css";
+import styles from "./Dashboard.module.css";
 import PieChart from "../PieChart/PieChart";
 import AddEdit from "../AddEdit/AddEdit";
 import Items from "../Items/Items";
-import Pagination from "./Pagination";
+import Pagination from "./Paginator";
 
 const Home = () => {
   const [edit, setEdit] = useState(false);
