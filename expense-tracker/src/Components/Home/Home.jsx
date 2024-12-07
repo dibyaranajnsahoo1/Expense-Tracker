@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Dashboard.module.css";
+import styles from "./Home.module.css";
 import PieChart from "../PieChart/PieChart";
 import AddEdit from "../AddEdit/AddEdit";
 import Items from "../Items/Items";
@@ -8,13 +8,7 @@ import Pagination from "./Paginator";
 const Home = () => {
   const [edit, setEdit] = useState(false);
   const [att, setAtt] = useState("expense");
-  const [transactions, setTransactions] = useState(() => {
-    if (localStorage.getItem("transaction")) {
-      let arr = JSON.parse(localStorage.getItem("transaction"));
-      return arr;
-    }
-    return [];
-  });
+  const [transactions, setTransactions] = useState([]);
   const [bars, setBars] = useState({ food: 1, travel: 1, entertaiment: 1 });
   const [Indexes, setIndexes] = useState({
     first: 0,
@@ -27,6 +21,20 @@ const Home = () => {
     orgBalance: 5000,
   });
 
+  useEffect(() => {
+    const storedTransactions = localStorage.getItem("transaction");
+    if (storedTransactions) {
+      setTransactions(JSON.parse(storedTransactions));
+    }
+  }, []);
+
+  useEffect(() => {
+    handleBalance_expenses();
+    if (transactions.length) {
+      localStorage.setItem("transaction", JSON.stringify(transactions));
+    }
+  }, [transactions]);
+
   const handleAddBalance = (addBalance) => {
     if (addBalance) {
       setBalanceExpense((prev) => ({
@@ -35,16 +43,10 @@ const Home = () => {
         balance: prev.balance + parseInt(addBalance),
       }));
     }
-    return;
   };
-  const handleBalance_expenses = () => {
-    let total_expense = 0;
-    if (transactions.length) {
-      transactions.forEach((e) => {
-        total_expense += parseInt(e.price);
-      });
-    }
 
+  const handleBalance_expenses = () => {
+    let total_expense = transactions.reduce((total, e) => total + parseInt(e.price || 0), 0);
     const balance = balance_expenses.orgBalance - total_expense;
 
     setBalanceExpense((prev) => ({
@@ -52,8 +54,8 @@ const Home = () => {
       balance: balance,
       expense: total_expense,
     }));
-    return;
   };
+
   const handleNewTransactions = (newTransactionObj, oldtitle) => {
     const { title, price, date, category } = newTransactionObj;
     if (!title || !price || !date || !category) return;
@@ -70,15 +72,19 @@ const Home = () => {
   };
 
   const handleEdit = (text, existingData) => {
-    text === "income" ? setAtt("income") : text === "edit_Expense" ? setAtt("edit_Expense") : setAtt("expense");
+    setAtt(
+      text === "income" ? "income" : text === "edit_Expense" ? "edit_Expense" : "expense"
+    );
     if (existingData) {
       setExistingDataObj(existingData);
     }
     setEdit(true);
   };
+
   const cancelAtt = (bool) => {
     if (!bool) setEdit(false);
   };
+
   const removetransaction = (title) => {
     setTransactions((prevTransactions) =>
       prevTransactions.filter((transaction) => transaction.title !== title)
@@ -87,37 +93,36 @@ const Home = () => {
 
   const handelcurrentPage = (data) => {
     const itemsPerPage = 3;
-    const indexOfLastItem = itemsPerPage * data;
+    const totalItems = transactions.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const currentPage = Math.min(Math.max(data, 1), totalPages);
+
+    const indexOfLastItem = itemsPerPage * currentPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
     setIndexes({ first: indexOfFirstItem, last: indexOfLastItem });
   };
+
   const calculateBarLengths = (expenses) => {
     const totalExpenses = Object.values(expenses).reduce(
-      (total, amount) => total + amount,
+      (total, amount) => total + (amount || 0),
       0
     );
     const percentages = {};
 
     for (const category in expenses) {
-      percentages[category] = (expenses[category] / totalExpenses) * 100;
+      percentages[category] = ((expenses[category] || 0) / totalExpenses) * 100;
     }
-    const boxLength = 296; 
+
+    const boxLength = 296;
     const barLengths = {};
 
     for (const category in percentages) {
-      barLengths[category] = Math.floor(
-        (boxLength / 100) * percentages[category]
-      );
+      barLengths[category] = Math.floor((boxLength / 100) * percentages[category]);
     }
+
     setBars(barLengths);
   };
-
-  useEffect(() => {
-    handleBalance_expenses();
-    if (transactions.length) {
-      localStorage.setItem("transaction", JSON.stringify(transactions));
-    }
-  }, [transactions]);
 
   return (
     <div>
@@ -125,30 +130,29 @@ const Home = () => {
         <div className={styles.heading}>Expense Tracker</div>
         <div className={styles.top}>
           <div className={styles.top1}>
-          <div className={styles.box}>
-            <div>
-              <span style={{color:'white'}}>Wallet Balance:</span>
-              <span style={{ fontWeight: "700", color: '#9DFF5B'
-}}>
-                ₹{balance_expenses.balance}
-              </span>
+            <div className={styles.box}>
+              <div>
+                <span style={{ color: "white" }}>Wallet Balance:</span>
+                <span style={{ fontWeight: "700", color: "#9DFF5B" }}>
+                  ₹{balance_expenses.balance}
+                </span>
+              </div>
+              <button onClick={() => handleEdit("income")}>+Add Income</button>
             </div>
-            <button onClick={() => handleEdit("income")}>+Add Income</button>
-          </div>
-          <div className={styles.box}>
-            <div>
-              <span style={{color:'white'}}>Expenses:</span>
-              <span style={{ fontWeight: "700" ,color: '#F4BB4A'}}>
-                ₹{balance_expenses.expense}
-              </span>
+            <div className={styles.box}>
+              <div>
+                <span style={{ color: "white" }}>Expenses:</span>
+                <span style={{ fontWeight: "700", color: "#F4BB4A" }}>
+                  ₹{balance_expenses.expense}
+                </span>
+              </div>
+              <button
+                onClick={() => handleEdit("expense")}
+                className={styles.expenseBtn}
+              >
+                +Add Expense
+              </button>
             </div>
-            <button
-              onClick={() => handleEdit("expense")}
-              className={styles.expenseBtn}
-            >
-              +Add Expense
-            </button>
-          </div>
           </div>
           <div className={styles.graph}>
             <PieChart
@@ -163,16 +167,14 @@ const Home = () => {
             <div className={styles.transactionsDetails}>
               {transactions
                 .slice(Indexes.first, Indexes.last)
-                .map((transaction, index) => {
-                  return (
-                    <Items
-                      data={transaction}
-                      key={index}
-                      handleEditfn={handleEdit}
-                      removeFn={removetransaction}
-                    />
-                  );
-                })}
+                .map((transaction, index) => (
+                  <Items
+                    data={transaction}
+                    key={index}
+                    handleEditfn={handleEdit}
+                    removeFn={removetransaction}
+                  />
+                ))}
               <div className={styles.pagination}>
                 <Pagination
                   currentPageFn={handelcurrentPage}
@@ -192,22 +194,22 @@ const Home = () => {
               <div className={styles.bars}>
                 <div
                   className={styles.entertaiment}
-                  style={{ width: `${bars.entertaiment}px` }}
+                  style={{ width: `${bars.entertaiment || 0}px` }}
                 ></div>
                 <div
                   className={styles.food}
-                  style={{ width: `${bars.food}px` }}
+                  style={{ width: `${bars.food || 0}px` }}
                 ></div>
                 <div
                   className={styles.travel}
-                  style={{ width: `${bars.travel}px` }}
+                  style={{ width: `${bars.travel || 0}px` }}
                 ></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {edit ? (
+      {edit && (
         <div className={styles.addMoney}>
           {att === "expense" ? (
             <AddEdit
@@ -235,7 +237,7 @@ const Home = () => {
             />
           )}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
