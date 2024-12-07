@@ -3,13 +3,13 @@ import styles from "./Home.module.css";
 import PieChart from "../PieChart/PieChart";
 import AddEdit from "../AddEdit/AddEdit";
 import Items from "../Items/Items";
-import Pagination from "./Paginator";
+import Pagination from "./Pagination";
 
 const Home = () => {
   const [edit, setEdit] = useState(false);
   const [att, setAtt] = useState("expense");
   const [transactions, setTransactions] = useState([]);
-  const [bars, setBars] = useState({ food: 1, travel: 1, entertaiment: 1 });
+  const [bars, setBars] = useState({ food: 1, travel: 1, entertainment: 1 });
   const [Indexes, setIndexes] = useState({
     first: 0,
     last: 3,
@@ -23,9 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     const storedTransactions = localStorage.getItem("transaction");
-    if (storedTransactions) {
-      setTransactions(JSON.parse(storedTransactions));
-    }
+    setTransactions(storedTransactions ? JSON.parse(storedTransactions) : []);
   }, []);
 
   useEffect(() => {
@@ -39,7 +37,7 @@ const Home = () => {
     if (addBalance) {
       setBalanceExpense((prev) => ({
         ...prev,
-        orgBalance: prev.balance + parseInt(addBalance),
+        orgBalance: prev.orgBalance + parseInt(addBalance),
         balance: prev.balance + parseInt(addBalance),
       }));
     }
@@ -51,7 +49,7 @@ const Home = () => {
 
     setBalanceExpense((prev) => ({
       ...prev,
-      balance: balance,
+      balance,
       expense: total_expense,
     }));
   };
@@ -165,16 +163,20 @@ const Home = () => {
           <div className={styles.transactions}>
             <div className={styles.headings_1}>Recent Transactions</div>
             <div className={styles.transactionsDetails}>
-              {transactions
-                .slice(Indexes.first, Indexes.last)
-                .map((transaction, index) => (
+              {transactions.length > 0 ? (
+                transactions.slice(Indexes.first, Indexes.last).map((transaction, index) => (
                   <Items
                     data={transaction}
                     key={index}
                     handleEditfn={handleEdit}
                     removeFn={removetransaction}
                   />
-                ))}
+                ))
+              ) : (
+                <p style={{ color: "gray", textAlign: "center" }}>
+                  No transactions available. Add one to get started!
+                </p>
+              )}
               <div className={styles.pagination}>
                 <Pagination
                   currentPageFn={handelcurrentPage}
@@ -194,7 +196,7 @@ const Home = () => {
               <div className={styles.bars}>
                 <div
                   className={styles.entertaiment}
-                  style={{ width: `${bars.entertaiment || 0}px` }}
+                  style={{ width: `${bars.entertainment || 0}px` }}
                 ></div>
                 <div
                   className={styles.food}
